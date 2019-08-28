@@ -1,6 +1,8 @@
 const hostListUrl =
   "https://raw.githubusercontent.com/EnergizedProtection/block/master/spark/formats/domains.txt"
 
+let blockedRequestsCount = 0
+
 fetch(hostListUrl)
   .then(response => response.text())
   .then(responseText => {
@@ -15,6 +17,11 @@ fetch(hostListUrl)
         const shouldBlockRequest = hostsToBlock.includes(targetHostname)
 
         console.log(targetHostname, shouldBlockRequest ? "blocked" : "allowed")
+
+        if (shouldBlockRequest) {
+          blockedRequestsCount++
+          chrome.browserAction.setBadgeText({ text: blockedRequestsCount.toString() })
+        }
 
         return { cancel: shouldBlockRequest }
       },
