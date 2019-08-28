@@ -1,0 +1,25 @@
+{
+  "manifest_version": 2,
+  "name": "Simple Adblock example",
+  "author": "Louis-Marie Michelin",
+  "homepage_url": "https://github.com/lmichelin/simple-adblock-example",
+  "permissions": ["storage", "webRequest", "webRequestBlocking", "<all_urls>"],
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": ["<all_urls>"],
+      "js": ["inject.js"]
+    }
+  ],
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "icons/adblock16.png",
+    "48": "icons/adblock48.png",
+    "128": "icons/adblock128.png"
+  }
+}
